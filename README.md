@@ -18,4 +18,5 @@ Fonctionnalités:
   
 Dépendances:
   - CinestiaCore ( Plugin spigot à mettre sur tout les serveurs )
+  - Luckperms ( Pour avoir accès aux nodes des permissions d'un joueur ) Lien: https://www.spigotmc.org/resources/luckperms.28140/
   - BungeeTheApi ( Pour la création des fichiers .yml ) Lien: https://www.spigotmc.org/resources/✅-bungeetheapi-✅.87143/
