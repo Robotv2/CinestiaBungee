@@ -1,4 +1,4 @@
-package fr.robotv2.cinestiabungee.listeners;
+package fr.robotv2.cinestiabungee.pluginMessage;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
@@ -60,6 +60,15 @@ public class pluginMessage implements Listener {
                     SERVEUR = player.getServer().getInfo().getName();
 
                     main.getUtils().getWarp().setwarp(player, name, X, Y , Z , YAW, PITCH, WORLD, SERVEUR);
+                    break;
+
+                case "advancement-player":
+                    String advancement = in.readUTF();
+                    main.getUtils().getAdv().addAdvancement(player, advancement);
+                    break;
+
+                case "get-advancement":
+                    main.getUtils().getAdv().initPlayer(player);
                     break;
             }
         }

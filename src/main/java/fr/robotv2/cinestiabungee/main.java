@@ -3,14 +3,15 @@ package fr.robotv2.cinestiabungee;
 import fr.robotv2.cinestiabungee.commands.home.delhomeCommand;
 import fr.robotv2.cinestiabungee.commands.home.homeCommand;
 import fr.robotv2.cinestiabungee.commands.home.sethomeCommand;
-import fr.robotv2.cinestiabungee.commands.tp.tphereCommand;
-import fr.robotv2.cinestiabungee.commands.warps.setwarpCommand;
 import fr.robotv2.cinestiabungee.commands.tp.tpCommand;
 import fr.robotv2.cinestiabungee.commands.tp.tpaCommand;
+import fr.robotv2.cinestiabungee.commands.tp.tphereCommand;
+import fr.robotv2.cinestiabungee.commands.warps.setwarpCommand;
 import fr.robotv2.cinestiabungee.commands.warps.warpCommand;
+import fr.robotv2.cinestiabungee.configs.advancements;
 import fr.robotv2.cinestiabungee.configs.homes;
 import fr.robotv2.cinestiabungee.configs.warps;
-import fr.robotv2.cinestiabungee.listeners.pluginMessage;
+import fr.robotv2.cinestiabungee.pluginMessage.pluginMessage;
 import fr.robotv2.cinestiabungee.utility.utilManager;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
@@ -26,6 +27,7 @@ public final class main extends Plugin {
 
     private homes homes;
     private warps warps;
+    private advancements advancements;
 
     @Override
     public void onEnable() {
@@ -56,7 +58,6 @@ public final class main extends Plugin {
     }
 
     public void registerChannel() {
-
         this.getProxy().registerChannel(this.channel);
         this.getProxy().getPluginManager().registerListener(this, new pluginMessage(this));
     }
@@ -64,6 +65,7 @@ public final class main extends Plugin {
     public void registerConfigs() {
         homes = new homes(this);
         warps = new warps(this);
+        advancements = new advancements(this);
     }
 
     public void registerClasses() {
@@ -86,4 +88,6 @@ public final class main extends Plugin {
     public warps getWarps() {
         return warps;
     }
+
+    public advancements getAdv() { return advancements; }
 }

@@ -7,11 +7,13 @@ public class utilManager {
     private mainUtil mainUtil;
     private homeUtil homeUtil;
     private warpUtil warpUtil;
+    private advUtil advUtil;
 
     public utilManager(main main) {
         mainUtil = new mainUtil(main);
         homeUtil = new homeUtil(main);
         warpUtil = new warpUtil(main);
+        advUtil = new advUtil(main);
     }
 
     public mainUtil getMain() {
@@ -21,4 +23,6 @@ public class utilManager {
     public homeUtil getHome() { return homeUtil; }
 
     public warpUtil getWarp() { return warpUtil; }
+
+    public advUtil getAdv() { return advUtil; }
 }

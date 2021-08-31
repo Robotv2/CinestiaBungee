@@ -3,12 +3,9 @@ package fr.robotv2.cinestiabungee.commands.home;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import fr.robotv2.cinestiabungee.main;
-import net.luckperms.api.node.Node;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
-
-import java.util.Set;
 
 public class sethomeCommand extends Command {
 
