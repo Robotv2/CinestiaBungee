@@ -5,6 +5,7 @@ Plugin réalisé pour le network Cinestia. ( play.cinestia.fr )
 Fonctionnalités:
  - Permet la téléportation de joueur à joueur entre différents serveurs.
  - Permet la téléportation de joueur à des points précis. ( Système de homes, warps )
+ - Synchronisation des achievements des joueurs sur plusieurs serveurs.
  
  Commandes:
   - /tpa ( cinestia.command.tpa )
