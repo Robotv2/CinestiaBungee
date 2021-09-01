@@ -102,10 +102,11 @@ public class homeCommand extends Command implements TabExecutor {
     @Override
     public Iterable<String> onTabComplete(CommandSender sender, String[] args) {
         if(!(sender instanceof ProxiedPlayer)) return null;
-        if(!homesName.isEmpty()) homesName.clear();
+        if(!homesName.isEmpty())
+            homesName.clear();
 
         ProxiedPlayer player = (ProxiedPlayer)sender;
-        homesName = new ArrayList<String>((main.getHomes().get().getKeys(player.getUniqueId().toString() + ".homes", false)));
+        homesName = new ArrayList<>(main.getHomes().get().getKeys(player.getUniqueId().toString() + ".homes", false));
 
         if (args[0].length() == 0) return homesName;
         if(args.length == 1) {

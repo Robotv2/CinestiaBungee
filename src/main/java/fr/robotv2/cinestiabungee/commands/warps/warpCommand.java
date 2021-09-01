@@ -39,7 +39,7 @@ public class warpCommand extends Command implements TabExecutor {
         Set<String> warps = main.getWarps().get().getKeys("warps", false);
 
         if(args.length == 0) {
-            main.getUtils().getMain().sendMessage(sender, "§fListe de(s) warp(s) disponible(s): " + getWarps(player, warps), true);
+            main.getUtils().getMain().sendMessage(sender, "&fListe de(s) warp(s) disponible(s): " + getWarps(player, warps), true);
             return;
         }
         String warpName = args[0];
@@ -71,15 +71,15 @@ public class warpCommand extends Command implements TabExecutor {
             return "&cAucun.";
         }
         for(String warp : warpsList) {
-            num = num + 1;
+            num++;
             if(totalWarp - 1 != num && totalWarp != 1 && totalWarp != num) {
-                homes.append("§e").append(warp).append("§f, ");
+                homes.append("&e").append(warp).append("&f, ");
             }
             else if(totalWarp == 1 || totalWarp == num) {
-                homes.append("§e").append(warp);
+                homes.append("&e").append(warp);
             }
             else {
-                homes.append("§e").append(warp).append(" §fet ");
+                homes.append("&e").append(warp).append(" &fet ");
             }
         }
         return homes.toString();

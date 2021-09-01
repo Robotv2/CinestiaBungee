@@ -29,7 +29,6 @@ public class advUtil {
     public void addAdvancement(ProxiedPlayer player, String advancement) {
         List<String> advancements = getAdvancements(player);
         if(advancements.contains(advancement)) return;
-
         else {
             LinkedList<String> result = new LinkedList<>(advancements);
             result.add(advancement);
@@ -39,23 +38,10 @@ public class advUtil {
             if(getNameFromKey(advancement) != null)
                 broadcastAdvancements(player, getNameFromKey(advancement));
         }
-
     }
 
     public List<String> getAdvancements(ProxiedPlayer player) {
         return main.getAdv().get().getStringList(player.getUniqueId() + ".advancements");
-    }
-
-    public String getFormattedAdvancements(ProxiedPlayer player) {
-        StringBuilder sb = new StringBuilder();
-        List<String> list = getAdvancements(player);
-        int count = 0;
-        for(String key : list) {
-            count++;
-            if (count != list.size()) sb.append(key + ";");
-            else sb.append(key);
-        }
-        return sb.toString();
     }
 
     private void broadcastAdvancements(ProxiedPlayer player, String advancement) {
@@ -67,38 +53,40 @@ public class advUtil {
                 .append("[" + advancement + "]").color(ChatColor.of("#29e3e0"))
                 .append(" !").color(ChatColor.WHITE).bold(false).create();
 
-        for (Iterator<ProxiedPlayer> iterator = main.getProxy().getPlayers().iterator(); iterator.hasNext();) {
-            ProxiedPlayer playerBungee = iterator.next();
-            playerBungee.sendMessage(message);
+        for(ProxiedPlayer receiver : main.getProxy().getPlayers()) {
+            receiver.sendMessage(message);
         }
     }
 
     public void initPlayer(ProxiedPlayer player) {
         List<String> advancements = getAdvancements(player);
-        int size = advancements.size();
-        count.remove(player);
-        count.put(player, size - 1);
+        setCount(player, advancements.size() - 1);
 
-        ScheduledTask task = ProxyServer.getInstance().getScheduler().schedule(main, new Runnable() {
-            @Override
-            public void run() {
-                if(player.isConnected() && count.get(player) >= 0) {
-                    String adv = advancements.get(count.get(player));
-                    sendToBukkitAdvancement(player, adv);
-                    int result = count.get(player) - 1;
-
-                    count.remove(player);
-                    count.put(player, result);
-                } else {
-                    scheduler.get(player).cancel();
-                }
+        ScheduledTask task = ProxyServer.getInstance().getScheduler().schedule(main, () -> {
+            if(player.isConnected() && getCount(player) >= 0) {
+                String adv = advancements.get(getCount(player));
+                sendToBukkitAdvancement(player, adv);
+                setCount(player, getCount(player) - 1);
+            } else {
+                scheduler.get(player).cancel();
+                scheduler.remove(player);
+                count.remove(player);
             }
-        },0, 100, TimeUnit.MILLISECONDS);
+        }, 0, 100, TimeUnit.MILLISECONDS);
         scheduler.put(player, task);
     }
 
+    public void setCount(ProxiedPlayer player, Integer value) {
+        count.remove(player);
+        count.put(player, value);
+    }
+
+    public int getCount(ProxiedPlayer player) {
+        return count.get(player);
+    }
+
     public void sendToBukkitAdvancement(ProxiedPlayer player, String advancement) {
-        final ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
 
         out.writeUTF("grant-advancement");
         out.writeUTF(advancement);

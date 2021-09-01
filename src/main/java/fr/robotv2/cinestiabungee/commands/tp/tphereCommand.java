@@ -2,10 +2,20 @@ package fr.robotv2.cinestiabungee.commands.tp;
 
 import fr.robotv2.cinestiabungee.main;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
+import net.md_5.bungee.api.scheduler.ScheduledTask;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class tphereCommand extends Command {
+
+    private ScheduledTask task;
+    private int count = 0;
 
     private main main;
     public tphereCommand(main main) {
@@ -21,19 +31,44 @@ public class tphereCommand extends Command {
             return;
         }
         if(args.length == 0) {
-            main.getUtils().getMain().sendMessage(sender, "&c&lUTILISATION&c: /tphere <joueur>", true);
+            main.getUtils().getMain().sendMessage(sender, "&c&lUTILISATION&c: /tphere <joueur> / all", true);
             return;
         }
 
         ProxiedPlayer player = (ProxiedPlayer) sender;
-        ProxiedPlayer target = main.getProxy().getPlayer(args[0]);
+        String arg1 = args[0];
 
+        if(!arg1.equalsIgnoreCase("all")) {
+            tpHereOne(player, args);
+        } else {
+            tpAll(player);
+        }
+    }
+
+    public void tpHereOne(ProxiedPlayer player, String[] args) {
+        ProxiedPlayer target = main.getProxy().getPlayer(args[0]);
         if(target == null || !target.isConnected()) {
             main.getUtils().getMain().sendMessage(player, "&cCe joueur n'est pas connecté.", true);
             return;
         }
-
         main.getUtils().getMain().teleportToPlayer(target, player);
         main.getUtils().getMain().sendMessage(player, "&7Vous avez téléporté &e" + target.getName() + " &7à votre position.", true);
+    }
+
+    public void tpAll(ProxiedPlayer player) {
+        count = 0;
+        List<ProxiedPlayer> players = new ArrayList<>(main.getProxy().getPlayers());
+
+        task = ProxyServer.getInstance().getScheduler().schedule(main, () -> {
+            ProxiedPlayer target = players.get(count);
+            if(count < players.size() - 1 ) {
+                if(target != null && target.isConnected())
+                    main.getUtils().getMain().teleportToPlayer(player, target);
+            } else {
+                task.cancel();
+            }
+        }, 0, 50, TimeUnit.MILLISECONDS);
+
+        main.getUtils().getMain().sendMessage(player, "&7Vous avez téléporté &etous les joueurs &7à votre position.", true);
     }
 }

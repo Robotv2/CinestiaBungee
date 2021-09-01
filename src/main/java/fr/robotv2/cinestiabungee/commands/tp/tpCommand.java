@@ -48,14 +48,13 @@ public class tpCommand extends Command implements TabExecutor {
     @Override
     public Iterable<String> onTabComplete(CommandSender sender, String[] args) {
         if(!(sender instanceof ProxiedPlayer)) return null;
-        playerList.clear();
 
         ProxiedPlayer player = (ProxiedPlayer) sender;
+        playerList.clear();
 
         for(ProxiedPlayer playerOnline : main.getProxy().getPlayers()) {
-            if(!playerOnline.equals(player)) {
+            if(!playerOnline.equals(player))
                 playerList.add(playerOnline.getName());
-            }
         }
 
         if (args[0].length() == 0) return playerList;

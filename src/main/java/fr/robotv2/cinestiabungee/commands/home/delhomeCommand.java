@@ -55,7 +55,7 @@ public class delhomeCommand extends Command implements TabExecutor {
         if(!homesName.isEmpty()) homesName.clear();
         if (args[0].length() == 0) return homesName;
 
-        ProxiedPlayer player = (ProxiedPlayer)sender;
+        ProxiedPlayer player = (ProxiedPlayer) sender;
         homesName = new ArrayList<String>((main.getHomes().get().getKeys(player.getUniqueId().toString() + ".homes", false)));
 
         if(args.length == 1) {

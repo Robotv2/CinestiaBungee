@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 public class mainUtil {
 
-    private main main;
+    private final main main;
     public TextComponent prefix;
 
     public mainUtil(main main) {
@@ -34,9 +34,9 @@ public class mainUtil {
     public void sendMessage(CommandSender player, String message, boolean prefix) {
         TextComponent msg = this.prefix.duplicate();
         if(prefix) {
-            msg.addExtra(" §7§l» " + message.replace("&", "§"));
+            msg.addExtra((" &7&l» " + message).replace('&', ChatColor.COLOR_CHAR));
         } else {
-            msg = new TextComponent(message.replace("&", "§"));
+            msg = new TextComponent(message.replace('&', ChatColor.COLOR_CHAR));
         }
         player.sendMessage(msg);
     }
@@ -44,6 +44,19 @@ public class mainUtil {
     public Collection<Node> getPermission(ProxiedPlayer player) {
         User user = main.getLuckperms().getPlayerAdapter(ProxiedPlayer.class).getUser(player);
         return user.getNodes();
+    }
+
+    public void showBanner(Long current) {
+        main.getLogger().info("§8==============================================");
+        main.getLogger().info("");
+        main.getLogger().info("§7   ___ _             _   _        ___ _   _ _  _  ___ ___ ___ ");
+        main.getLogger().info("§7  / __(_)_ _  ___ __| |_(_)__ _  | _ ) | | | \\| |/ __| __| __|");
+        main.getLogger().info("§7 | (__| | ' \\/ -_|_-<  _| / _` | | _ \\ |_| | .` | (_ | _|| _| ");
+        main.getLogger().info("§7  \\___|_|_||_\\___/__/\\__|_\\__,_| |___/\\___/|_|\\_|\\___|___|___|");
+        main.getLogger().info("");
+        main.getLogger().info("§7Le plugin a été chargé en §e" + (System.currentTimeMillis() - current) + " MS");
+        main.getLogger().info("");
+        main.getLogger().info("§8==============================================");
     }
 
     public void teleportToLocation(ProxiedPlayer player, Double X, Double Y, Double Z, Float yaw, Float pitch, String world, String server) {
@@ -62,7 +75,8 @@ public class mainUtil {
         srv.sendData(main.channel, out.toByteArray());
 
         main.getProxy().getScheduler().schedule(main, () -> {
-            if(!player.getServer().getInfo().equals(srv)) player.connect(srv);
+            if(!player.getServer().getInfo().equals(srv))
+                player.connect(srv);
             }, 150, TimeUnit.MILLISECONDS);
     }
 

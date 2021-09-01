@@ -4,7 +4,9 @@ import fr.robotv2.cinestiabungee.main;
 import me.devtec.bungeetheapi.configapi.Config;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class warpUtil {
@@ -14,9 +16,13 @@ public class warpUtil {
         this.main = main;
     }
 
+    public List<String> getWarps() {
+        return new ArrayList<String>(main.getWarps().get().getKeys("warps", false));
+    }
+
     public Set<String> getAccessibleWarps(ProxiedPlayer player) {
         Set<String> result = new HashSet<String>();
-        for(String warp : main.getWarps().get().getKeys("warps", false)) {
+        for(String warp : getWarps()) {
             if(player.hasPermission("cinestia.warp." + warp))
                 result.add(warp);
         }

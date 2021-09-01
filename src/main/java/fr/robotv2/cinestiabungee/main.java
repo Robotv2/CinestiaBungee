@@ -1,5 +1,7 @@
 package fr.robotv2.cinestiabungee;
 
+import fr.robotv2.cinestiabungee.commands.tp.backCommand;
+import fr.robotv2.cinestiabungee.commands.warps.delwarpCommand;
 import fr.robotv2.cinestiabungee.commands.home.delhomeCommand;
 import fr.robotv2.cinestiabungee.commands.home.homeCommand;
 import fr.robotv2.cinestiabungee.commands.home.sethomeCommand;
@@ -9,8 +11,10 @@ import fr.robotv2.cinestiabungee.commands.tp.tphereCommand;
 import fr.robotv2.cinestiabungee.commands.warps.setwarpCommand;
 import fr.robotv2.cinestiabungee.commands.warps.warpCommand;
 import fr.robotv2.cinestiabungee.configs.advancements;
+import fr.robotv2.cinestiabungee.configs.back;
 import fr.robotv2.cinestiabungee.configs.homes;
 import fr.robotv2.cinestiabungee.configs.warps;
+import fr.robotv2.cinestiabungee.listeners.quitEvent;
 import fr.robotv2.cinestiabungee.pluginMessage.pluginMessage;
 import fr.robotv2.cinestiabungee.utility.utilManager;
 import net.luckperms.api.LuckPerms;
@@ -28,18 +32,19 @@ public final class main extends Plugin {
     private homes homes;
     private warps warps;
     private advancements advancements;
+    private back back;
 
     @Override
     public void onEnable() {
+        Long current = System.currentTimeMillis();
+
         registerCommands();
         registerConfigs();
         registerClasses();
         registerChannel();
-    }
+        registerListeners();
 
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
+        getUtils().getMain().showBanner(current);
     }
 
     public void registerCommands() {
@@ -48,7 +53,9 @@ public final class main extends Plugin {
         pm.registerCommand(this, new tphereCommand(this));
         pm.registerCommand(this, new tpaCommand(this));
         pm.registerCommand(this, new tpCommand(this));
+        pm.registerCommand(this, new backCommand(this));
 
+        pm.registerCommand(this, new delwarpCommand(this));
         pm.registerCommand(this, new warpCommand(this));
         pm.registerCommand(this, new setwarpCommand(this));
 
@@ -58,19 +65,25 @@ public final class main extends Plugin {
     }
 
     public void registerChannel() {
-        this.getProxy().registerChannel(this.channel);
-        this.getProxy().getPluginManager().registerListener(this, new pluginMessage(this));
+        getProxy().registerChannel(channel);
+        getProxy().getPluginManager().registerListener(this, new pluginMessage(this));
     }
 
     public void registerConfigs() {
         homes = new homes(this);
         warps = new warps(this);
         advancements = new advancements(this);
+        back = new back(this);
     }
 
     public void registerClasses() {
         luckperms = LuckPermsProvider.get();
         utilManager = new utilManager(this);
+    }
+
+    public void registerListeners() {
+        PluginManager pm = getProxy().getPluginManager();
+        pm.registerListener(this, new quitEvent(this));
     }
 
     public LuckPerms getLuckperms() {
@@ -87,6 +100,10 @@ public final class main extends Plugin {
 
     public warps getWarps() {
         return warps;
+    }
+
+    public back getBack() {
+        return back;
     }
 
     public advancements getAdv() { return advancements; }

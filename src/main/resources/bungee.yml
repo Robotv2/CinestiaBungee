@@ -1,6 +1,7 @@
 name: CinestiaBungee
 version: '${project.version}'
 main: fr.robotv2.cinestiabungee.main
+author: Robotv2
 depends:
   - BungeeTheAPI
   - LuckPerms
