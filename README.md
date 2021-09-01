@@ -16,6 +16,7 @@ Fonctionnalités:
   - /sethome ( cinestia.command.sethome )
   - /setwarp ( cinestia.command.setwarp )
   - /warp ( cinestia.command.warp )
+  - /delwarp ( cinestia.command.delwarp )
   
 Dépendances:
   - CinestiaCore ( Plugin spigot à mettre sur tout les serveurs )
