@@ -11,6 +11,7 @@ Fonctionnalités:
   - /tpa ( cinestia.command.tpa )
   - /tp ( cinestia.command.tp )
   - /tphere ( cinestia.command.tphere )
+  - /back ( cinestia.command.back )
   - /home ( cinestia.command.home )
   - /delhome ( cinestia.command.delhome )
   - /sethome ( cinestia.command.sethome )
