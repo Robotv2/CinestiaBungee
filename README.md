@@ -6,6 +6,7 @@ Fonctionnalités:
  - Permet la téléportation de joueur à joueur entre différents serveurs.
  - Permet la téléportation de joueur à des points précis. ( Système de homes, warps )
  - Synchronisation des achievements des joueurs sur plusieurs serveurs.
+ - BOT discord ( en cours... )
  
  Commandes:
   - /tpa ( cinestia.command.tpa )
