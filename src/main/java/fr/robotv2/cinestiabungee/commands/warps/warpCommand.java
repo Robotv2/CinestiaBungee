@@ -1,6 +1,7 @@
 package fr.robotv2.cinestiabungee.commands.warps;
 
 import fr.robotv2.cinestiabungee.main;
+import fr.robotv2.cinestiabungee.utility.mainUtil;
 import me.devtec.bungeetheapi.configapi.Config;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -52,13 +53,13 @@ public class warpCommand extends Command implements TabExecutor {
         x = config.getDouble("warps." + warpName + ".X");
         y = config.getDouble("warps." + warpName + ".Y");
         z = config.getDouble("warps." + warpName + ".Z");
-        world = config.getString("warps." + warpName + ".monde");
-        yaw = config.getFloat("warps." + warpName + ".yaw");
-        pitch = config.getFloat("warps." + warpName + ".pitch");
-        serveur = config.getString("warps." + warpName + ".serveur");
+        world = config.getString("warps." + warpName + ".WORLD");
+        yaw = config.getFloat("warps." + warpName + ".YAW");
+        pitch = config.getFloat("warps." + warpName + ".PITCH");
+        serveur = config.getString("warps." + warpName + ".SERVER");
 
-        main.getUtils().getMain().teleportToLocation(player, x, y, z, yaw, pitch, world, serveur);
-        main.getUtils().getMain().sendMessage(player, "&fVous avez été téléporté au warp: §b" + warpName, true);
+        main.getUtils().getMain().teleportToLocation(player, x, y, z, yaw, pitch, world, serveur, 3, mainUtil.teleportReason.WARP, warpName);
+        //main.getUtils().getMain().sendMessage(player, "&fVous avez été téléporté au warp: &b" + warpName, true);
     }
 
     public String getWarps(ProxiedPlayer player, Set<String> warpsList) {

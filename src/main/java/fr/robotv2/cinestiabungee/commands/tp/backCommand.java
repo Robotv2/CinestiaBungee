@@ -2,13 +2,9 @@ package fr.robotv2.cinestiabungee.commands.tp;
 
 import fr.robotv2.cinestiabungee.main;
 import me.devtec.bungeetheapi.TheAPI;
-import me.devtec.bungeetheapi.configapi.Config;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
-
-import java.util.Set;
-import java.util.UUID;
 
 public class backCommand extends Command {
 
@@ -28,7 +24,7 @@ public class backCommand extends Command {
             return;
         }
 
-        ProxiedPlayer player = (ProxiedPlayer)sender;
+        ProxiedPlayer player = (ProxiedPlayer) sender;
 
         if(!main.getUtils().getBack().has(player)) {
             main.getUtils().getMain().sendMessage(player, "&cAucune localisation enregistrée.", true);

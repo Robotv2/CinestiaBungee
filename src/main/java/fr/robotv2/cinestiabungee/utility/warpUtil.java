@@ -17,34 +17,31 @@ public class warpUtil {
     }
 
     public List<String> getWarps() {
-        return new ArrayList<String>(main.getWarps().get().getKeys("warps", false));
+        return new ArrayList<>(main.getWarps().get().getKeys("warps", false));
     }
 
     public Set<String> getAccessibleWarps(ProxiedPlayer player) {
         Set<String> result = new HashSet<String>();
         for(String warp : getWarps()) {
-            if(player.hasPermission("cinestia.warp." + warp))
+            if(main.hasPermission(player, "cinestia.warp." + warp.toLowerCase()))
                 result.add(warp);
         }
         return result;
     }
 
     public boolean hasAccess(ProxiedPlayer player, String name) {
-        Set<String> warps = getAccessibleWarps(player);
-        return !warps.contains(name) || !player.hasPermission("cinestia.warp." + name);
+        return getAccessibleWarps(player).contains(name);
     }
 
-    public void setwarp(ProxiedPlayer player, String name, Double x, Double y, Double z, Float yaw, Float pitch, String world, String serveur) {
+    public void setwarp(String name, Double X, Double Y, Double Z, Float YAW, Float PITCH, String WORLD, String SERVER) {
         Config warps = main.getWarps().get();
-        warps.set("warps." + name + ".X", x);
-        warps.set("warps." + name + ".Y", y);
-        warps.set("warps." + name + ".Z", z);
-
-        warps.set("warps." + name + ".monde", world);
-
-        warps.set("warps." + name + ".yaw", yaw);
-        warps.set("warps." + name + ".pitch", pitch);
-        warps.set("warps." + name + ".serveur", serveur);
+        warps.set("warps." + name + ".X", X);
+        warps.set("warps." + name + ".Y", Y);
+        warps.set("warps." + name + ".Z", Z);
+        warps.set("warps." + name + ".WORLD", WORLD);
+        warps.set("warps." + name + ".YAW", YAW);
+        warps.set("warps." + name + ".PITCH", PITCH);
+        warps.set("warps." + name + ".SERVER", SERVER);
         warps.save();
     }
 }

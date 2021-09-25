@@ -1,6 +1,7 @@
 package fr.robotv2.cinestiabungee.commands.home;
 
 import fr.robotv2.cinestiabungee.main;
+import fr.robotv2.cinestiabungee.utility.mainUtil;
 import me.devtec.bungeetheapi.TheAPI;
 import me.devtec.bungeetheapi.configapi.Config;
 import net.md_5.bungee.api.CommandSender;
@@ -71,7 +72,7 @@ public class homeCommand extends Command implements TabExecutor {
         world = homes.getString(uuid.toString() + ".homes." + home + ".world");
         serveur = homes.getString(uuid.toString() + ".homes." + home + ".serveur");
 
-        main.getUtils().getMain().teleportToLocation(player, x, y, z, yaw, pitch, world, serveur);
+        main.getUtils().getMain().teleportToLocation(player, x, y, z, yaw, pitch, world, serveur, 5, mainUtil.teleportReason.HOME, home);
         TheAPI.getCooldownAPI(player).createCooldown("home", 200);
     }
 

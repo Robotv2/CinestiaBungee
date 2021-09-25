@@ -1,7 +1,5 @@
 package fr.robotv2.cinestiabungee.commands.warps;
 
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
 import fr.robotv2.cinestiabungee.main;
 import me.devtec.bungeetheapi.configapi.Config;
 import net.md_5.bungee.api.CommandSender;
@@ -30,7 +28,7 @@ public class delwarpCommand extends Command implements TabExecutor {
             return;
         }
         if(args.length == 0) {
-            main.getUtils().getMain().sendMessage(sender, "&cUTILISATION: /setwarp <warp>", true);
+            main.getUtils().getMain().sendMessage(sender, "&cUTILISATION: /delwarp <warp>", true);
             return;
         }
 
@@ -53,11 +51,11 @@ public class delwarpCommand extends Command implements TabExecutor {
         warps.set("warps." + warp + ".Y", null);
         warps.set("warps." + warp + ".Z", null);
 
-        warps.set("warps." + warp + ".monde", null);
+        warps.set("warps." + warp + ".WORLD", null);
 
-        warps.set("warps." + warp + ".yaw", null);
-        warps.set("warps." + warp + ".pitch", null);
-        warps.set("warps." + warp + ".serveur", null);
+        warps.set("warps." + warp + ".YAW", null);
+        warps.set("warps." + warp + ".PITCH", null);
+        warps.set("warps." + warp + ".SERVER", null);
         warps.save();
     }
 

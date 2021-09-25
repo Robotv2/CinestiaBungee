@@ -91,7 +91,7 @@ public class tpaCommand extends Command implements TabExecutor {
             main.getUtils().getMain().sendMessage(player, "&fVous avez accepté la demande de téléportation.", true);
             main.getUtils().getMain().sendMessage(sender, "&b" + player.getName() + " &fa accepté votre demande, téléportation en cours.", true);
 
-            main.getUtils().getMain().teleportToPlayer(sender, player);
+            main.getUtils().getMain().teleportToPlayer(sender, player, 3);
             return;
         }
         main.getUtils().getMain().sendMessage(player, "&cVous n'avez aucune demande en attente.", true);

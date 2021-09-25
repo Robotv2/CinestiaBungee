@@ -41,7 +41,7 @@ public class tpCommand extends Command implements TabExecutor {
             return;
         }
 
-        main.getUtils().getMain().teleportToPlayer(player, target);
+        main.getUtils().getMain().teleportToPlayer(player, target, 0);
         main.getUtils().getMain().sendMessage(player, "&7Vous vous êtes téléporté à &e" + target.getName(), true);
     }
 

@@ -9,6 +9,9 @@ public class utilManager {
     private warpUtil warpUtil;
     private advUtil advUtil;
     private backUtil backUtil;
+    private rtpUtil rtpUtil;
+    private spawnUtil spawnUtil;
+    private rankupUtil rankupUtil;
 
     public utilManager(main main) {
         mainUtil = new mainUtil(main);
@@ -16,6 +19,9 @@ public class utilManager {
         warpUtil = new warpUtil(main);
         advUtil = new advUtil(main);
         backUtil = new backUtil(main);
+        rtpUtil = new rtpUtil(main);
+        spawnUtil = new spawnUtil(main);
+        rankupUtil = new rankupUtil(main);
     }
 
     public mainUtil getMain() {
@@ -29,4 +35,12 @@ public class utilManager {
     public advUtil getAdv() { return advUtil; }
 
     public backUtil getBack() { return backUtil; }
+
+    public rtpUtil getRtp() { return  rtpUtil; }
+
+    public spawnUtil getSpawn() {
+        return spawnUtil;
+    }
+
+    public rankupUtil getRankUp() { return rankupUtil; }
 }

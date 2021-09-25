@@ -20,7 +20,7 @@ public class sethomeCommand extends Command {
         if(!(sender instanceof ProxiedPlayer)) {
             return;
         }
-        if(!sender.hasPermission("cinestia.command.home")) {
+        if(!sender.hasPermission("cinestia.command.sethome")) {
             main.getUtils().getMain().sendMessage(sender, "&cVous n'avez pas la permission de faire cette commande.", true);
             return;
         }

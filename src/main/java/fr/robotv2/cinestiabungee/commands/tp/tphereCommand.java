@@ -8,7 +8,6 @@ import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.scheduler.ScheduledTask;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -51,7 +50,7 @@ public class tphereCommand extends Command {
             main.getUtils().getMain().sendMessage(player, "&cCe joueur n'est pas connecté.", true);
             return;
         }
-        main.getUtils().getMain().teleportToPlayer(target, player);
+        main.getUtils().getMain().teleportToPlayer(target, player, 0);
         main.getUtils().getMain().sendMessage(player, "&7Vous avez téléporté &e" + target.getName() + " &7à votre position.", true);
     }
 
@@ -63,7 +62,7 @@ public class tphereCommand extends Command {
             ProxiedPlayer target = players.get(count);
             if(count < players.size() - 1 ) {
                 if(target != null && target.isConnected())
-                    main.getUtils().getMain().teleportToPlayer(player, target);
+                    main.getUtils().getMain().teleportToPlayer(player, target, 0);
             } else {
                 task.cancel();
             }

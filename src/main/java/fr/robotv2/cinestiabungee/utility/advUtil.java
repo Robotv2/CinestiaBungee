@@ -11,7 +11,6 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.scheduler.ScheduledTask;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -68,8 +67,7 @@ public class advUtil {
                 sendToBukkitAdvancement(player, adv);
                 setCount(player, getCount(player) - 1);
             } else {
-                scheduler.get(player).cancel();
-                scheduler.remove(player);
+                stop(player);
                 count.remove(player);
             }
         }, 0, 100, TimeUnit.MILLISECONDS);
@@ -83,6 +81,13 @@ public class advUtil {
 
     public int getCount(ProxiedPlayer player) {
         return count.get(player);
+    }
+
+    public void stop(ProxiedPlayer player) {
+        if(!scheduler.containsKey(player)) return;
+
+        scheduler.get(player).cancel();
+        scheduler.remove(player);
     }
 
     public void sendToBukkitAdvancement(ProxiedPlayer player, String advancement) {

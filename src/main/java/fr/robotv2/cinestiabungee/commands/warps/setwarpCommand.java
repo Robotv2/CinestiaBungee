@@ -31,7 +31,9 @@ public class setwarpCommand extends Command {
 
         ProxiedPlayer player = (ProxiedPlayer) sender;
         String warpName = args[0];
+
         setwarp(player, warpName);
+        main.getUtils().getMain().sendMessage(player, "&fVous venez de mettre le warp &e" + warpName +" &fà votre localisation.", true);
     }
 
     public void setwarp(ProxiedPlayer player, String name) {
