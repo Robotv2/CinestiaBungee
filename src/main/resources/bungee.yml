@@ -1,6 +1,6 @@
 name: CinestiaBungee
 version: '${project.version}'
-main: fr.robotv2.cinestiabungee.main
+main: fr.robotv2.cinestiabungee.Main
 author: Robotv2
 depends:
   - BungeeTheAPI
