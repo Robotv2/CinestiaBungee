@@ -43,7 +43,7 @@ public class SpawnUtil {
         world = spawn.getString("FIRST-SPAWN.world");
         serveur = spawn.getString("FIRST-SPAWN.serveur");
 
-        main.getUtils().getMain().teleportToLocation(player, x, y, z, yaw, pitch, world, serveur, 5, null, null);
+        main.getUtils().getMain().teleportToLocation(player, x, y, z, yaw, pitch, world, serveur, 0, null, null);
     }
 
     public void setspawn(Double x, Double y, Double z, Float yaw, Float pitch, String world, String serveur) {

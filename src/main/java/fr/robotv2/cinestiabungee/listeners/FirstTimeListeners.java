@@ -26,13 +26,14 @@ public class FirstTimeListeners implements Listener {
 
             if(!HAS_PLAYED_BEFORE) {
                 //Le joueur ne s'est jamais connecté.
-                for(ProxiedPlayer connected : main.getProxy().getPlayers()) {
-                    main.getUtils().getMain().sendMessage(connected, "&3", false);
-                    main.getUtils().getMain().sendMessage(connected, "&3&l> &fLe joueur &b" + player.getName() + " &fvient de rejoindre le serveur &bpour la première fois &3!", false);
-                    main.getUtils().getMain().sendMessage(connected, "&3", false);
-                }
-            }
+                main.getUtils().getSpawn().teleportToFirstSpawn(player);
+                main.getPlayerInfo().get().set(player.getUniqueId() + ".HAS-PLAYED-BEFORE", true);
+                main.getPlayerInfo().saveDB();
 
-        }, 200, TimeUnit.MILLISECONDS);
+                main.getUtils().getMain().broadcast("&3");
+                main.getUtils().getMain().broadcast("&3&l> &fLe joueur &b" + player.getName() + " &fvient de rejoindre le serveur &bpour la première fois &3!");
+                main.getUtils().getMain().broadcast("&3");
+            }
+        }, 2, TimeUnit.SECONDS);
     }
 }

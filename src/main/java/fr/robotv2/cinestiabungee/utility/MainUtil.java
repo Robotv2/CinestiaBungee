@@ -69,11 +69,12 @@ public class MainUtil {
         out.writeUTF(world);
 
         sendStartTeleport(player, delay);
-        if(delay > 0) main.getUtils().getMain().sendMessage(player, "&7Téléportation dans &e" + delay + " &7secondes...", true);
+        if(delay > 0)
+            main.getUtils().getMain().sendMessage(player, "&7Téléportation dans &e" + delay + " &7secondes...", true);
 
         main.getProxy().getScheduler().schedule(main, () -> {
             if(!player.isConnected()) return;
-            srv.sendData(main.channel, out.toByteArray());
+            srv.sendData(Main.channel, out.toByteArray());
             sendReasonMessage(player, reason, reasonValue);
         }, delay, TimeUnit.SECONDS);
 
@@ -143,6 +144,6 @@ public class MainUtil {
         out.writeUTF("init-teleport");
         out.writeInt(delay);
 
-        player.getServer().sendData(main.channel, out.toByteArray());
+        player.getServer().sendData(Main.channel, out.toByteArray());
     }
 }

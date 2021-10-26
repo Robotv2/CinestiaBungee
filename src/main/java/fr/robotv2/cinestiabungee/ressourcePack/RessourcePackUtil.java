@@ -7,14 +7,18 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class RessourcePackUtil {
 
-    private static final List<ProxiedPlayer> players = new ArrayList<>();
-
     public static void sendDemand(ProxiedPlayer player) {
-        ByteArrayDataOutput out = ByteStreams.newDataOutput();
-        out.writeUTF("ressource-pack-demand");
-        player.getServer().sendData(Main.channel, out.toByteArray());
+        try {
+
+            ByteArrayDataOutput out = ByteStreams.newDataOutput();
+            out.writeUTF("ressource-pack-demand");
+            player.getServer().sendData(Main.channel, out.toByteArray());
+
+        } catch (NullPointerException ignored) {
+        }
     }
 }

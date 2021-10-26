@@ -6,31 +6,33 @@ import fr.robotv2.cinestiabungee.Main;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.connection.Server;
 
 import java.util.concurrent.TimeUnit;
 
 public class RtpUtil {
-    private Main main;
+    private final Main main;
+    private final ServerInfo ressource;
     public RtpUtil(Main main) {
         this.main = main;
+        ressource = ProxyServer.getInstance().getServerInfo("ressource");
     }
 
-    public enum worldType {
-        OVERWORLD, NETHER, END;
+    public enum WorldType {
+        OVERWORLD, NETHER, END
     }
 
-    public void rtpPlayer(ProxiedPlayer player,worldType type) {
-        ServerInfo info = ProxyServer.getInstance().getServerInfo("ressource");
+    public void rtpPlayer(ProxiedPlayer player, WorldType type) {
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
 
         out.writeUTF("prepare-rtp");
         out.writeUTF(player.getUniqueId().toString());
         out.writeUTF(type.toString());
 
-        info.sendData(main.channel, out.toByteArray());
+        ressource.sendData(Main.channel, out.toByteArray());
 
         main.getProxy().getScheduler().schedule(main, () -> {
-            player.connect(info);
-        }, 1, TimeUnit.SECONDS);
+            player.connect(ressource);
+        }, 250, TimeUnit.SECONDS);
     }
 }

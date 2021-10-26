@@ -21,7 +21,7 @@ public class BackUtil {
         this.main = main;
     }
 
-    public void set(ProxiedPlayer player, Double x, Double y, Double z, Float yaw, Float pitch, String world, String serveur) {
+    public void setBack(ProxiedPlayer player, Double x, Double y, Double z, Float yaw, Float pitch, String world, String serveur) {
         Config backs = main.getBack().get();
         UUID uuid = player.getUniqueId();
 

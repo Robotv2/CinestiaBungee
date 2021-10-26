@@ -1,5 +1,7 @@
 package fr.robotv2.cinestiabungee;
 
+import fr.robotv2.cinestiabungee.commands.BoutiqueCommand;
+import fr.robotv2.cinestiabungee.commands.DiscordCommand;
 import fr.robotv2.cinestiabungee.commands.bossbar.BossBarCommand;
 import fr.robotv2.cinestiabungee.commands.home.DelhomeCommand;
 import fr.robotv2.cinestiabungee.commands.home.HomeCommand;
@@ -87,6 +89,9 @@ public final class Main extends Plugin {
         pm.registerCommand(this, new SpawnCommand(this));
 
         pm.registerCommand(this, new BossBarCommand(this));
+
+        pm.registerCommand(this, new DiscordCommand());
+        pm.registerCommand(this, new BoutiqueCommand());
     }
 
     public void registerChannel() {

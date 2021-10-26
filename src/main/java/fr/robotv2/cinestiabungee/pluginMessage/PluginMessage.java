@@ -13,23 +13,14 @@ import java.util.UUID;
 
 public class PluginMessage implements Listener {
 
-    private Double X;
-    private Double Y;
-    private Double Z;
-    private Float YAW;
-    private Float PITCH;
-    private String WORLD;
-    private String SERVEUR;
-
-
-    private Main main;
+    private final Main main;
     public PluginMessage(Main main) {
         this.main = main;
     }
 
     @EventHandler
     public void onMessage(PluginMessageEvent e) {
-        if(e.getTag().equalsIgnoreCase(main.channel)) {
+        if(e.getTag().equalsIgnoreCase(Main.channel)) {
             ProxiedPlayer player = main.getProxy().getPlayer(e.getReceiver().toString());
             UUID uuid = player.getUniqueId();
 
@@ -39,65 +30,65 @@ public class PluginMessage implements Listener {
             switch (sub.toLowerCase()) {
                 case "sethome-player":
                     String name = in.readUTF();
-                    X = in.readDouble();
-                    Y = in.readDouble();
-                    Z = in.readDouble();
-                    YAW = in.readFloat();
-                    PITCH = in.readFloat();
-                    WORLD = in.readUTF();
-                    SERVEUR = player.getServer().getInfo().getName();
+                    double x = in.readDouble();
+                    double y = in.readDouble();
+                    double z = in.readDouble();
+                    float YAW = in.readFloat();
+                    float PITCH = in.readFloat();
+                    String WORLD = in.readUTF();
+                    String SERVEUR = player.getServer().getInfo().getName();
 
-                    main.getUtils().getHome().sethome(player, name, X, Y , Z , YAW, PITCH, WORLD, SERVEUR);
+                    main.getUtils().getHome().sethome(player, name, x, y, z, YAW, PITCH, WORLD, SERVEUR);
                     break;
 
                 case "setwarp-player":
                     name = in.readUTF();
-                    X = in.readDouble();
-                    Y = in.readDouble();
-                    Z = in.readDouble();
+                    x = in.readDouble();
+                    y = in.readDouble();
+                    z = in.readDouble();
                     YAW = in.readFloat();
                     PITCH = in.readFloat();
                     WORLD = in.readUTF();
                     SERVEUR = player.getServer().getInfo().getName();
 
-                    main.getUtils().getWarp().setwarp(name, X, Y , Z , YAW, PITCH, WORLD, SERVEUR);
+                    main.getUtils().getWarp().setwarp(name, x, y, z, YAW, PITCH, WORLD, SERVEUR);
                     System.out.println("oui");
                     break;
 
                 case "setback-player":
-                    X = in.readDouble();
-                    Y = in.readDouble();
-                    Z = in.readDouble();
+                    x = in.readDouble();
+                    y = in.readDouble();
+                    z = in.readDouble();
                     YAW = in.readFloat();
                     PITCH = in.readFloat();
                     WORLD = in.readUTF();
                     SERVEUR = player.getServer().getInfo().getName();
 
-                    main.getUtils().getBack().set(player, X, Y, Z, YAW, PITCH, WORLD, SERVEUR);
+                    main.getUtils().getBack().setBack(player, x, y, z, YAW, PITCH, WORLD, SERVEUR);
                     break;
 
                 case "setspawn-player":
-                    X = in.readDouble();
-                    Y = in.readDouble();
-                    Z = in.readDouble();
+                    x = in.readDouble();
+                    y = in.readDouble();
+                    z = in.readDouble();
                     YAW = in.readFloat();
                     PITCH = in.readFloat();
                     WORLD = in.readUTF();
                     SERVEUR = player.getServer().getInfo().getName();
 
-                    main.getUtils().getSpawn().setspawn(X, Y, Z, YAW, PITCH, WORLD, SERVEUR);
+                    main.getUtils().getSpawn().setspawn(x, y, z, YAW, PITCH, WORLD, SERVEUR);
                     break;
 
                 case "setfirstspawn-player":
-                    X = in.readDouble();
-                    Y = in.readDouble();
-                    Z = in.readDouble();
+                    x = in.readDouble();
+                    y = in.readDouble();
+                    z = in.readDouble();
                     YAW = in.readFloat();
                     PITCH = in.readFloat();
                     WORLD = in.readUTF();
                     SERVEUR = player.getServer().getInfo().getName();
 
-                    main.getUtils().getSpawn().setFirstSpawn(X, Y, Z, YAW, PITCH, WORLD, SERVEUR);
+                    main.getUtils().getSpawn().setFirstSpawn(x, y, z, YAW, PITCH, WORLD, SERVEUR);
                     break;
 
                 case "command":
@@ -114,7 +105,7 @@ public class PluginMessage implements Listener {
                     break;
 
                 case "prepare-rtp":
-                    RtpUtil.worldType world = RtpUtil.worldType.valueOf(in.readUTF());
+                    RtpUtil.WorldType world = RtpUtil.WorldType.valueOf(in.readUTF());
                     main.getUtils().getRtp().rtpPlayer(player, world);
                     break;
 

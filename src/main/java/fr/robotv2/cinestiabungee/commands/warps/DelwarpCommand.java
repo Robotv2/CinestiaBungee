@@ -8,6 +8,7 @@ import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.TabExecutor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DelwarpCommand extends Command implements TabExecutor {
@@ -61,16 +62,16 @@ public class DelwarpCommand extends Command implements TabExecutor {
 
     @Override
     public Iterable<String> onTabComplete(CommandSender sender, String[] args) {
-        if(!(sender instanceof ProxiedPlayer)) return null;
+        if(!(sender instanceof ProxiedPlayer)) return Collections.emptyList();
 
         List<String> warps = main.getUtils().getWarp().getWarps();
         if (args[0].length() == 0) return warps;
 
         if(args.length == 1) {
             List<String> result = new ArrayList<>() ;
-            for(int i = 0; i < warps.size(); ++i) {
-                if (warps.get(i).startsWith(args[0])) {
-                    result.add(warps.get(i));
+            for (String warp : warps) {
+                if (warp.startsWith(args[0])) {
+                    result.add(warp);
                 }
             }
             return result;
