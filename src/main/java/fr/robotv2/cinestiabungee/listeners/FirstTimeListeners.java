@@ -26,7 +26,6 @@ public class FirstTimeListeners implements Listener {
 
             if(!HAS_PLAYED_BEFORE) {
                 //Le joueur ne s'est jamais connecté.
-                main.getUtils().getSpawn().teleportToFirstSpawn(player);
                 main.getPlayerInfo().get().set(player.getUniqueId() + ".HAS-PLAYED-BEFORE", true);
                 main.getPlayerInfo().saveDB();
 

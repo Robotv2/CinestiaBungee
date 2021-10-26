@@ -3,7 +3,6 @@ package fr.robotv2.cinestiabungee.pluginMessage;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 import fr.robotv2.cinestiabungee.Main;
-import fr.robotv2.cinestiabungee.utility.RtpUtil;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PluginMessageEvent;
 import net.md_5.bungee.api.plugin.Listener;

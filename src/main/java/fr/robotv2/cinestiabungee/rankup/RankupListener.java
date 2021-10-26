@@ -11,7 +11,6 @@ import net.md_5.bungee.event.EventHandler;
 
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class RankupListener implements Listener {
 

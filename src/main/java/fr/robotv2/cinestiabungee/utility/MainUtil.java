@@ -55,79 +55,6 @@ public class MainUtil {
         main.getLogger().info("§8==============================================");
     }
 
-    public void teleportToLocation(ProxiedPlayer player, Double X, Double Y, Double Z, Float yaw, Float pitch, String world, String server, int delay, teleportReason reason, String reasonValue) {
-        ServerInfo srv = ProxyServer.getInstance().getServerInfo(server);
-        ByteArrayDataOutput out = ByteStreams.newDataOutput();
-
-        out.writeUTF("initialize-teleport");
-        out.writeUTF(player.getUniqueId().toString());
-        out.writeDouble(X);
-        out.writeDouble(Y);
-        out.writeDouble(Z);
-        out.writeFloat(yaw);
-        out.writeFloat(pitch);
-        out.writeUTF(world);
-
-        sendStartTeleport(player, delay);
-        if(delay > 0)
-            main.getUtils().getMain().sendMessage(player, "&7Téléportation dans &e" + delay + " &7secondes...", true);
-
-        main.getProxy().getScheduler().schedule(main, () -> {
-            if(!player.isConnected()) return;
-            srv.sendData(Main.channel, out.toByteArray());
-            sendReasonMessage(player, reason, reasonValue);
-        }, delay, TimeUnit.SECONDS);
-
-        main.getProxy().getScheduler().schedule(main, () -> {
-            if(!player.getServer().getInfo().equals(srv))
-                player.connect(srv);
-            }, delay * 1000L + 200, TimeUnit.MILLISECONDS);
-    }
-
-    public void teleportToPlayer(ProxiedPlayer player, ProxiedPlayer target, int delay) {
-        ServerInfo srv = target.getServer().getInfo();
-        ByteArrayDataOutput out = ByteStreams.newDataOutput();
-
-        out.writeUTF("teleport-to-player");
-        out.writeUTF(player.getUniqueId().toString());
-        out.writeUTF(target.getUniqueId().toString());
-
-        sendStartTeleport(player, delay);
-
-        if(delay > 0) main.getUtils().getMain().sendMessage(player, "&7Téléportation dans &e" + delay + " &7secondes...", true);
-        main.getProxy().getScheduler().schedule(main, () -> {
-            if(!player.isConnected()) return;
-            if(!target.isConnected()) {
-                main.getUtils().getMain().sendMessage(player, "&cLe joueur visé vient de se déconnecter.", true);
-                return;
-            }
-            target.getServer().sendData(main.channel, out.toByteArray());
-        }, delay, TimeUnit.SECONDS);
-
-        main.getProxy().getScheduler().schedule(main, () -> {
-            if(!player.getServer().getInfo().equals(srv)) player.connect(srv);
-        }, delay * 1000L + 200, TimeUnit.MILLISECONDS);
-    }
-
-    public void sendReasonMessage(ProxiedPlayer player, teleportReason reason, String reasonValue) {
-        if(reason != null) {
-            switch(reason) {
-                case SPAWN:
-                    sendMessage(player, "&7Vous avez été téléporté au &bSpawn", true);
-                    break;
-                case WARP:
-                    sendMessage(player, "&7Vous avez été téléporté au warp: &b" + reasonValue, true);
-                    break;
-                case HOME:
-                    sendMessage(player, "&7fVous avez été téléporté au home: &b" + reasonValue, true);
-                    break;
-                case BACK:
-                    sendMessage(player, "&7Vous avez été téléporté à votre dernier emplacement.", true);
-                    break;
-            }
-        }
-    }
-
     public void broadcast(String message) {
         for(ProxiedPlayer p : main.getProxy().getPlayers()) {
             main.getUtils().getMain().sendMessage(p, message, false);
@@ -136,14 +63,5 @@ public class MainUtil {
 
     public static String color(String message) {
         return ChatColor.translateAlternateColorCodes('&', message);
-    }
-
-    public void sendStartTeleport(ProxiedPlayer player, int delay) {
-        ByteArrayDataOutput out = ByteStreams.newDataOutput();
-
-        out.writeUTF("init-teleport");
-        out.writeInt(delay);
-
-        player.getServer().sendData(Main.channel, out.toByteArray());
     }
 }

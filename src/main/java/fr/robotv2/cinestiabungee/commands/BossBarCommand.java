@@ -1,4 +1,4 @@
-package fr.robotv2.cinestiabungee.commands.bossbar;
+package fr.robotv2.cinestiabungee.commands;
 
 import fr.robotv2.cinestiabungee.Main;
 import net.md_5.bungee.api.CommandSender;

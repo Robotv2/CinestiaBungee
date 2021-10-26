@@ -5,10 +5,6 @@ import com.google.common.io.ByteStreams;
 import fr.robotv2.cinestiabungee.Main;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 public class RessourcePackUtil {
 
     public static void sendDemand(ProxiedPlayer player) {
