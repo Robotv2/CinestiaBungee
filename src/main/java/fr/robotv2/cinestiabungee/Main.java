@@ -21,7 +21,7 @@ import net.md_5.bungee.api.plugin.PluginManager;
 public final class Main extends Plugin {
 
     public final static String channel = "cinestia:channel";
-    public final String rankup_channel = "rankup:channel";
+    public final static String rankup_channel = "rankup:channel";
 
     private LuckPerms luckperms;
     private UtilManager utilManager;
